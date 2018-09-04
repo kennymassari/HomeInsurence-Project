@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Home Insurance</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @*<style>
+        body 
+        {
+            background-color: lightcyan;
+        }
+    </style>*@
+    <div class="container body-content">
+        <h1 class="shared-text">Homeowners Insurance</h1>
+        @Html.Partial("NavBar")
+        <hr class="underline-border" />
+        <h3 class="shared-text">@ViewBag.PageTitle</h3>
+        <div class="body-padding">
+            @RenderBody()
+        </div>
+        <hr class="underline-border" />
+        <footer>
+            <p class="shared-text">Copyright &copy; @DateTime.Now.Year Homeownerinsurance.com All Rights Reserved</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

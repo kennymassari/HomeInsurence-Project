@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CodeFirstDatabase" CdmEntityContainer="QuotesEntity">
+    <EntitySetMapping Name="HomeOwners">
+      <EntityTypeMapping TypeName="HomeInsurance.Models.Homeowner">
+        <MappingFragment StoreEntitySet="Homeowner">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="IsRetired" ColumnName="IsRetired" />
+          <ScalarProperty Name="SSN" ColumnName="SSN" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="HomeInsurance.Models.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="HomeInsurance.Models.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="HomeownerId" ColumnName="HomeownerId" />
+          <ScalarProperty Name="ResidenceType" ColumnName="ResidenceType" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="ResidenceUse" ColumnName="ResidenceUse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Policies">
+      <EntityTypeMapping TypeName="HomeInsurance.Models.Policy">
+        <MappingFragment StoreEntitySet="Policy">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+          <ScalarProperty Name="PolicyKey" ColumnName="PolicyKey" />
+          <ScalarProperty Name="PolicyEffDate" ColumnName="PolicyEffDate" />
+          <ScalarProperty Name="PolicyEndDate" ColumnName="PolicyEndDate" />
+          <ScalarProperty Name="PolicyTerm" ColumnName="PolicyTerm" />
+          <ScalarProperty Name="PolicyStatus" ColumnName="PolicyStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quotes">
+      <EntityTypeMapping TypeName="HomeInsurance.Models.Quote">
+        <MappingFragment StoreEntitySet="Quote">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+          <ScalarProperty Name="MonthlyPremium" ColumnName="MonthlyPremium" />
+          <ScalarProperty Name="DwellingCoverage" ColumnName="DwellingCoverage" />
+          <ScalarProperty Name="DetachedStructure" ColumnName="DetachedStructure" />
+          <ScalarProperty Name="PersonalProperty" ColumnName="PersonalProperty" />
+          <ScalarProperty Name="AddnlLivgExpense" ColumnName="AddnlLivgExpense" />
+          <ScalarProperty Name="MedicalExpense" ColumnName="MedicalExpense" />
+          <ScalarProperty Name="Deductible" ColumnName="Deductible" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Properties">
+      <EntityTypeMapping TypeName="HomeInsurance.Models.Property">
+        <MappingFragment StoreEntitySet="Property">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="MarketValue" ColumnName="MarketValue" />
+          <ScalarProperty Name="YearBuilt" ColumnName="YearBuilt" />
+          <ScalarProperty Name="SquareFootage" ColumnName="SquareFootage" />
+          <ScalarProperty Name="DwellingStyle" ColumnName="DwellingStyle" />
+          <ScalarProperty Name="RoofMaterial" ColumnName="RoofMaterial" />
+          <ScalarProperty Name="GarageType" ColumnName="GarageType" />
+          <ScalarProperty Name="NumFullBaths" ColumnName="NumFullBaths" />
+          <ScalarProperty Name="NumHalfBaths" ColumnName="NumHalfBaths" />
+          <ScalarProperty Name="HasSwimmingPool" ColumnName="HasSwimmingPool" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

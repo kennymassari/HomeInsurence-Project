@@ -1,0 +1,39 @@
+﻿@model HomeInsurance.Models.Policy
+
+@{
+    ViewBag.Title = "Confirmation";
+    ViewBag.PageTitle = "Confirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div align="center">
+    @if (Session["Admin"] != null)
+    {
+        @Html.ActionLink("Back to User Policies", "UserPolicies", "Admin", null, new { @class = "toplink" })
+    }
+    @if (Session["Admin"] == null)
+    {
+        @Html.ActionLink("Back to My Policies", "MyPolicies", null, new { @class = "toplink" })
+    }
+</div>
+
+@if (Model.PolicyTerm == 0) {
+    <b>Policy Cancelled Successfully.</b>
+}
+
+@if (Model.PolicyTerm == 1) {
+    <b>Our customer service representative will contact you shortly for premium collection arrangements.</b>
+}
+
+@if (Model.PolicyTerm == 2) {
+    <b>Policy Renewed Successfully.</b>
+}        
+
+<ul>
+    <li>Quote Id: @Model.QuoteId</li>
+    <li>Policy Key: @Model.PolicyKey</li>
+    <li>Policy Effective Date: @Model.PolicyEffDate</li>
+    <li>Policy End Date: @Model.PolicyEndDate</li>
+    <li>Policy Term: @Model.PolicyTerm</li>
+    <li>Policy Status: @Model.PolicyStatus</li>
+</ul>

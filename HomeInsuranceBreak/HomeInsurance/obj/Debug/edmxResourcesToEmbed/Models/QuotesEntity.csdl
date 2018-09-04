@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HomeInsurance.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Homeowner" customannotation:ClrType="HomeInsurance.Models.Homeowner, HomeInsurance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DOB" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsRetired" Type="Boolean" Nullable="false" />
+    <Property Name="SSN" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.Homeowner_User" FromRole="Homeowner_User_Source" ToRole="Homeowner_User_Target" />
+  </EntityType>
+  <EntityType Name="User" customannotation:ClrType="HomeInsurance.Models.User, HomeInsurance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Location" customannotation:ClrType="HomeInsurance.Models.Location, HomeInsurance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HomeownerId" Type="Int32" Nullable="false" />
+    <Property Name="ResidenceType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddressLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddressLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="State" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ResidenceUse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Homeowner" Relationship="Self.Location_Homeowner" FromRole="Location_Homeowner_Source" ToRole="Location_Homeowner_Target" />
+  </EntityType>
+  <EntityType Name="Policy" customannotation:ClrType="HomeInsurance.Models.Policy, HomeInsurance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuoteId" Type="Int32" Nullable="false" />
+    <Property Name="PolicyKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PolicyEffDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PolicyEndDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PolicyTerm" Type="Int32" Nullable="false" />
+    <Property Name="PolicyStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Quote" Relationship="Self.Policy_Quote" FromRole="Policy_Quote_Source" ToRole="Policy_Quote_Target" />
+  </EntityType>
+  <EntityType Name="Quote" customannotation:ClrType="HomeInsurance.Models.Quote, HomeInsurance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PropertyId" Type="Int32" Nullable="false" />
+    <Property Name="MonthlyPremium" Type="Double" Nullable="false" />
+    <Property Name="DwellingCoverage" Type="Double" Nullable="false" />
+    <Property Name="DetachedStructure" Type="Double" Nullable="false" />
+    <Property Name="PersonalProperty" Type="Double" Nullable="false" />
+    <Property Name="AddnlLivgExpense" Type="Double" Nullable="false" />
+    <Property Name="MedicalExpense" Type="Double" Nullable="false" />
+    <Property Name="Deductible" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Property" Relationship="Self.Quote_Property" FromRole="Quote_Property_Source" ToRole="Quote_Property_Target" />
+  </EntityType>
+  <EntityType Name="Property" customannotation:ClrType="HomeInsurance.Models.Property, HomeInsurance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LocationId" Type="Int32" Nullable="false" />
+    <Property Name="MarketValue" Type="Int32" Nullable="false" />
+    <Property Name="YearBuilt" Type="Int32" Nullable="false" />
+    <Property Name="SquareFootage" Type="Int32" Nullable="false" />
+    <Property Name="DwellingStyle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoofMaterial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GarageType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumFullBaths" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumHalfBaths" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HasSwimmingPool" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Location" Relationship="Self.Property_Location" FromRole="Property_Location_Source" ToRole="Property_Location_Target" />
+  </EntityType>
+  <Association Name="Homeowner_User">
+    <End Role="Homeowner_User_Source" Type="Self.Homeowner" Multiplicity="*" />
+    <End Role="Homeowner_User_Target" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="Homeowner_User_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Homeowner_User_Source">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Location_Homeowner">
+    <End Role="Location_Homeowner_Source" Type="Self.Location" Multiplicity="*" />
+    <End Role="Location_Homeowner_Target" Type="Self.Homeowner" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="Location_Homeowner_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Location_Homeowner_Source">
+        <PropertyRef Name="HomeownerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Property_Location">
+    <End Role="Property_Location_Source" Type="Self.Property" Multiplicity="*" />
+    <End Role="Property_Location_Target" Type="Self.Location" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="Property_Location_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Property_Location_Source">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Quote_Property">
+    <End Role="Quote_Property_Source" Type="Self.Quote" Multiplicity="*" />
+    <End Role="Quote_Property_Target" Type="Self.Property" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="Quote_Property_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quote_Property_Source">
+        <PropertyRef Name="PropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Policy_Quote">
+    <End Role="Policy_Quote_Source" Type="Self.Policy" Multiplicity="*" />
+    <End Role="Policy_Quote_Target" Type="Self.Quote" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="Policy_Quote_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Policy_Quote_Source">
+        <PropertyRef Name="QuoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QuotesEntity" customannotation:UseClrTypes="true">
+    <EntitySet Name="HomeOwners" EntityType="Self.Homeowner" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="Policies" EntityType="Self.Policy" />
+    <EntitySet Name="Quotes" EntityType="Self.Quote" />
+    <EntitySet Name="Properties" EntityType="Self.Property" />
+    <AssociationSet Name="Homeowner_User" Association="Self.Homeowner_User">
+      <End Role="Homeowner_User_Source" EntitySet="HomeOwners" />
+      <End Role="Homeowner_User_Target" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="Location_Homeowner" Association="Self.Location_Homeowner">
+      <End Role="Location_Homeowner_Source" EntitySet="Locations" />
+      <End Role="Location_Homeowner_Target" EntitySet="HomeOwners" />
+    </AssociationSet>
+    <AssociationSet Name="Property_Location" Association="Self.Property_Location">
+      <End Role="Property_Location_Source" EntitySet="Properties" />
+      <End Role="Property_Location_Target" EntitySet="Locations" />
+    </AssociationSet>
+    <AssociationSet Name="Quote_Property" Association="Self.Quote_Property">
+      <End Role="Quote_Property_Source" EntitySet="Quotes" />
+      <End Role="Quote_Property_Target" EntitySet="Properties" />
+    </AssociationSet>
+    <AssociationSet Name="Policy_Quote" Association="Self.Policy_Quote">
+      <End Role="Policy_Quote_Source" EntitySet="Policies" />
+      <End Role="Policy_Quote_Target" EntitySet="Quotes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

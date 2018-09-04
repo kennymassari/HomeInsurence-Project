@@ -1,0 +1,9 @@
+ssn error msg only shows format must be nnn-nn-nnn not nnn-nn-nnnn x
+the link to the quoteterm page in the quote summary page doesnt work x
+	reqested url: /Detailz/QuoteTerms
+policy start date format is wrong yyyy/mm/dd(buy policy page)
+get quote button doesnt work on navbar in the get started page x
+homeowner page dob format needs to be yyyy/mm/dd x
+quoteid is not shown (confirmation page) x
+buy policy policy start date is able to be more than 60 days x
+my policies doesnt list all the policies that were bought x

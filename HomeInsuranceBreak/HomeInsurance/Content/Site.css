@@ -1,0 +1,106 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: lightcyan;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Alters the styling seen on the login page */
+.paragraph-text {
+    font-style: italic;
+    text-align: center;
+    text-justify: inter-word;
+}
+
+/* Alters the styling seen on the _layout page */
+.shared-text {
+    color: black;
+    text-align: center;
+}
+
+/* Alters the border color in the shared layout */
+.underline-border {
+    border-top: 1px solid gray;
+}
+
+/* Aligns the image correctly onscreen */
+.center-image {
+    display: block;
+    margin: auto;
+    padding-bottom: 20px;
+}
+
+/* Gets rid of some additions made by navbar-default */
+.navbar-default {
+    background-color: inherit;
+    border: 0;
+}
+
+/* Centers the nav bar */
+.navbar-default > .container-fluid {
+    display: flex;
+    justify-content: center;
+}
+
+/* Some styling when hovering over a nav bar option */
+.navbar-brand:hover {
+    font-style: italic;
+    color: black;
+}
+
+/* Alters elements using columns to be properly aligned */
+.row {
+    display: flex;
+    align-items: center;
+}
+
+/* Provides some coloring to the table's head */
+.colored-tablehead {
+    background-color: black;
+    color: white;
+}
+
+/* Changes the color of the table's data rows */
+tr > td {
+    background-color: lightsteelblue;
+}
+
+/* Adjusts the padding space for the main page's content */
+.body-padding {
+    padding: 40px 40px;
+}
+
+/* Set the error messages color */
+.validation-summary-errors,
+.field-validation-error {
+    color: red;
+}
+
+/* Alter the field's border color & size */
+.input-validation-error {
+    border: 2px solid red;
+}
+
+.admin-text {
+	background-color: antiquewhite;
+	border: none;
+}

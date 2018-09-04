@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CodeFirstDatabaseSchema" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Homeowner">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" customannotation:Index="{ Name: IX_UserId, Order: 0 }" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="DOB" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="IsRetired" Type="bit" Nullable="false" />
+    <Property Name="SSN" Type="nvarchar" MaxLength="9" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IsAdmin" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HomeownerId" Type="int" customannotation:Index="{ Name: IX_HomeownerId, Order: 0 }" Nullable="false" />
+    <Property Name="ResidenceType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AddressLine1" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AddressLine2" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="City" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="State" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Zip" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ResidenceUse" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Policy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuoteId" Type="int" customannotation:Index="{ Name: IX_QuoteId, Order: 0 }" Nullable="false" />
+    <Property Name="PolicyKey" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PolicyEffDate" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PolicyEndDate" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PolicyTerm" Type="int" Nullable="false" />
+    <Property Name="PolicyStatus" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Quote">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PropertyId" Type="int" customannotation:Index="{ Name: IX_PropertyId, Order: 0 }" Nullable="false" />
+    <Property Name="MonthlyPremium" Type="float" Nullable="false" />
+    <Property Name="DwellingCoverage" Type="float" Nullable="false" />
+    <Property Name="DetachedStructure" Type="float" Nullable="false" />
+    <Property Name="PersonalProperty" Type="float" Nullable="false" />
+    <Property Name="AddnlLivgExpense" Type="float" Nullable="false" />
+    <Property Name="MedicalExpense" Type="float" Nullable="false" />
+    <Property Name="Deductible" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Property">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationId" Type="int" customannotation:Index="{ Name: IX_LocationId, Order: 0 }" Nullable="false" />
+    <Property Name="MarketValue" Type="int" Nullable="false" />
+    <Property Name="YearBuilt" Type="int" Nullable="false" />
+    <Property Name="SquareFootage" Type="int" Nullable="false" />
+    <Property Name="DwellingStyle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoofMaterial" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GarageType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumFullBaths" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumHalfBaths" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HasSwimmingPool" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="Homeowner_User">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Homeowner" Type="Self.Homeowner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Homeowner">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Location_Homeowner">
+    <End Role="Homeowner" Type="Self.Homeowner" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Location" Type="Self.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Homeowner">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="HomeownerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Property_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Property" Type="Self.Property" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Property">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Quote_Property">
+    <End Role="Property" Type="Self.Property" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Property">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quote">
+        <PropertyRef Name="PropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Policy_Quote">
+    <End Role="Quote" Type="Self.Quote" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Policy" Type="Self.Policy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quote">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Policy">
+        <PropertyRef Name="QuoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CodeFirstDatabase">
+    <EntitySet Name="Homeowner" EntityType="Self.Homeowner" Schema="dbo" Table="Homeowners" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" Table="Users" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" Table="Locations" />
+    <EntitySet Name="Policy" EntityType="Self.Policy" Schema="dbo" Table="Policies" />
+    <EntitySet Name="Quote" EntityType="Self.Quote" Schema="dbo" Table="Quotes" />
+    <EntitySet Name="Property" EntityType="Self.Property" Schema="dbo" Table="Properties" />
+    <AssociationSet Name="Homeowner_User" Association="Self.Homeowner_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Homeowner" EntitySet="Homeowner" />
+    </AssociationSet>
+    <AssociationSet Name="Location_Homeowner" Association="Self.Location_Homeowner">
+      <End Role="Homeowner" EntitySet="Homeowner" />
+      <End Role="Location" EntitySet="Location" />
+    </AssociationSet>
+    <AssociationSet Name="Property_Location" Association="Self.Property_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="Property" EntitySet="Property" />
+    </AssociationSet>
+    <AssociationSet Name="Quote_Property" Association="Self.Quote_Property">
+      <End Role="Property" EntitySet="Property" />
+      <End Role="Quote" EntitySet="Quote" />
+    </AssociationSet>
+    <AssociationSet Name="Policy_Quote" Association="Self.Policy_Quote">
+      <End Role="Quote" EntitySet="Quote" />
+      <End Role="Policy" EntitySet="Policy" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
